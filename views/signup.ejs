@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <style>
+    body {
+      background-color: #f1f1f1;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-top: 50px;
+    }
+
+    form {
+      max-width: 300px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      color: #555;
+    }
+
+    input[type="text"], input[type="email"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+    .error-message {
+      color: red;
+margin-top: 0px;
+      margin-bottom: 0px;
+    }
+    span{
+display:block;
+margin-top: 0px;
+margin-bottom: 0px;
+
+width: 100px;
+height: 10px;
+}
+  </style>
+
+</head>
+<body>
+  <h1>Signup</h1>
+  <form action="/signup" method="POST">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+      <span class="error-message">
+      <% if (error.name) { %>
+      Invalid name
+      <% } %>
+    </span>
+      <br>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <span class="error-message">
+      <% if (error.email) { %>
+      Invalid email
+      <% } %>
+    </span>
+    <br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    <span class="error-message">
+      <% if (error.password) { %>
+      Invalid password
+      <% } %>
+    </span>
+    <br>
+    <br>
+    <label for="company">Company:</label>
+    <input type="text" id="company" name="company" required>
+    <br>
+    <input type="submit" value="Signup">
+  </form>
+</body>
+</html>
+<script>
+  // Function to hide the error message after a specified timeout
+  function hideErrorMessage() {
+  var errorMessages = document.querySelectorAll('.error-message');
+  if (errorMessages) {
+    setTimeout(function() {
+      // Loop through each error message element
+      errorMessages.forEach(function(errorMessage) {
+        errorMessage.style.display = 'none';
+      });
+    }, 10000); // 10 seconds timeout
+  }
+}
+
+  // Call the hideErrorMessage function on page load
+  document.addEventListener('DOMContentLoaded', hideErrorMessage);
+</script>
