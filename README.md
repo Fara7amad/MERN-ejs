@@ -50,4 +50,15 @@ It consists of 3 views:
 1. Changing customers' schema to handle the fact that each customer may have more than 1 bill.
 2. Server-Side pagination needed 
 3. Adding customer moadl needs improvements in displaying the error source and keeping the user's input values displayed. 
+---
+<h4> Test data to login </h4>
+
+john@super.com
+Admin@1234
+
+jane@super.com
+Admin@12344
+
+doe@tech.com
+Admin@12345
  
