@@ -8,7 +8,8 @@ const bcrypt=require('bcrypt')
  * @param {object} res Renders signup page 
  */
 const getSignup=async(req,res)=>{
-  res.render('signup',{error:false});
+  res.render('signup', { error: { name: false, email: true, password: false }, name:'', email:'', password:'', company:'' });
+  
 }
 
 /**
@@ -17,18 +18,16 @@ const getSignup=async(req,res)=>{
  * @param {Object} res Renders login page if success, signup page if fail
  */
 const postSignup=async(req,res)=>{
-  const {  name, email, password, company} = req.body;
-  if(!req.body){res.render('signup',{error:false});}
+  const {name, email, password, company} = req.body;
+  if(!req.body){ return res.redirect('/signup')}
   const user = await findUser(email);
-  if (user) {return res.render('login',{error:'User exists! '});}
-  const {validEmail,validName,validPass, validCompany}=validateInputs(email,name,password,company);
-  if(validEmail && validName && validPass && validCompany){
-
+  if (user) {return res.render('signup', { error: { name: false, email: "Email Exists!", password: false }, name: name, email:email, password:password, company:company }); }
+  const {validEmail,validName,validPass}=validateInputs(email,name,password);
+  if(validEmail && validName && validPass){
     createUser(name,email,password,company,res);
-    res.redirect("/");
   }
   else{
-     res.render('signup', { error: { name: !validName, email: !validEmail, password: !validPass, company:!validCompany } });
+    res.render('signup', { error: { name: !validName, email: !validEmail, password: !validPass }, name: name, email:email, password:password, company:company });
   }
   
 }
@@ -39,9 +38,6 @@ const postSignup=async(req,res)=>{
  * @param {Object} res Renders login if not logged in already, if logged it redirects the user to customers page
  */
 const getLogggin = async (req, res) => {
-  if(req.session.user){
-    res.redirect("/customers");
-  }else
   res.render('login',{error:false});
 }
 
@@ -60,10 +56,10 @@ const postLoggin = async (req, res) => {
 
     // Check if the user exists
     if (!user) {return res.render('login',{error:'Invalid email '});}
-    
+
     // Validate the password
     const validPassword = await bcrypt.compare(pass, user.password);
-    
+   
     // Check if the password is valid
     if (!validPassword) {return res.render('login',{error:'Invalid password'});}
       req.session.user=user;

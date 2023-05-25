@@ -31,7 +31,7 @@
       color: #555;
     }
 
-    input[type="text"], input[type="email"], input[type="password"] {
+    input[type="text"], input[type="email"], input[type="password"], select[type='company'] {
       width: 100%;
       padding: 10px;
       margin-bottom: 20px;
@@ -70,42 +70,40 @@ height: 10px;
 <body>
   <h1>Signup</h1>
   <form action="/signup" method="POST">
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" required>
-      <% if (error.name) { %>
-        <span class="error-message">
-      Invalid name
-    </span>
-      <% } %>
-      <br>
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
-    <% if (error.email) { %>
-      <span class="error-message">
-      Invalid email
-    </span>
-      <% } %>
-    <br>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-    
-      <% if (error.password) { %>
-        <span class="error-message">
-      Invalid password
-    </span>
-      <% } %>
-    <br>
-    <label for="company">Company:</label>
-    <input type="text" id="company" name="company" required>
-    <% if (error.company) { %>
-      <span class="error-message">
-    Invalid company
-  </span>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required value="<%= name  %>">
+    <% if (error.name) { %>
+      <span class="error-message">Invalid name</span>
     <% } %>
     <br>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required value="<%=  email  %>">
+    <% if (error.email === false) { %>
+      <span class="error-message">Invalid email</span>
+      <% } else if (error.email === "Email Exists!") {%>
+        <span class="error-message">Email Exists!</span>
+    <% } %>
+    <br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" value="<%= password %>" required>
+    <% if (error.password) { %>
+      <span class="error-message">Invalid password</span>
+     
+
+    <% } %>
+    <br>
+    <label for="company">Company:</label>
+    <select type="company" id="company" name="company" required>
+      <option value="" selected disabled>Select a company</option>
+      <option value="Super Company" <%= company === 'Super Company' ? 'selected' : '' %>>Super Company</option>
+      <option value="Tech Savy" <%= company === 'Tech Savy' ? 'selected' : '' %>>Tech Savy</option>
+    </select>
+    <br>
     <input type="submit" value="Signup">
-    <label style="margin-left: 20%;">Have an account? <a href='/'>Login</a></label> 
+    <label style="margin-left: 20%;">Have an account? <a href="/">Login</a></label> 
   </form>
+  
+  
 </body>
 </html>
 <script>

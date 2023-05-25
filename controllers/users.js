@@ -33,7 +33,6 @@ const createUser=async (name,email,password,company,res) => {
   
       // Save the user to the database
       await newUser.save();
-  console.log("User created successfully")
       res.render("login",{ error: 'User created successfully' });
     } catch (error) {
       console.error('Error creating user:', error);

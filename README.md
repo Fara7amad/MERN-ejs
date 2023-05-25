@@ -45,5 +45,7 @@ It consists of 3 views:
       const billsRegex=/^[0-9]+$/ //Only Numbers
    ```
 ---
-<h4>Improvements needed: Changing customers' schema to handle the fact that each customer may have more than 1 bill.<h4> 
+<h4>Improvements needed: </h4>
+1. Changing customers' schema to handle the fact that each customer may have more than 1 bill.
+2. Server-Side pagination needed  
  

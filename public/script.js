@@ -38,7 +38,7 @@ error: function() {
 }
 });
 
-// Reset the input fields
+
 document.getElementById('newName').value = '';
 document.getElementById('newEmail').value = '';
 document.getElementById('newPhone').value = '';
@@ -52,29 +52,27 @@ modalInstance.hide();
 }
 
 function confirmDelete(customerId, customerName, customerEmail) {
-// Set customer info in the confirmation modal
 const modalElement = document.getElementById('deleteModal');
 const modalInstance = new bootstrap.Modal(modalElement);
                 modalInstance.show();
 document.getElementById('deleteCustomerName').textContent = customerName;
 document.getElementById('deleteCustomerEmail').textContent = customerEmail;
 
-// Store the customer ID in a global variable to access it in the deleteConfirmed function
 window.deleteCustomerId = customerId;
 }
 
 function deleteConfirmed() {
 const customerId = window.deleteCustomerId;
 
-// Send an AJAX request to delete the customer
+
 fetch(`/customers/${customerId}`, {
   method: 'DELETE',
 })
   .then(response => response.json())
   .then(data => {
-    // Check the response data for success or failure
+    
     if (data.success) {
-      // Refresh the page to update the customer list
+  
       location.reload();
     } else {
         console.error('Failed to update course:', error);
@@ -86,14 +84,13 @@ fetch(`/customers/${customerId}`, {
 }
 
 
-// Function to toggle edit mode
 function toggleEdit(rowId) {
 const row = document.getElementById('row' + rowId);
 const editButton = row.querySelector('.edit-button');
 const saveButton = row.querySelector('.save-button');
 
 if (row.classList.contains('edit-mode')) {
-// Switch back to view mode
+
 row.classList.remove('edit-mode');
 
 if (editButton) {
@@ -104,7 +101,7 @@ if (saveButton) {
   saveButton.style.display = 'none';
 }
 
-// Hide the input fields and show the span elements
+
 const inputFields = row.querySelectorAll('input[type="text"]');
 const spanElements = row.querySelectorAll('span');
 
@@ -116,7 +113,7 @@ spanElements.forEach(span => {
   span.style.display = 'inline-block';
 });
 } else {
-// Switch to edit mode
+
 row.classList.add('edit-mode');
 
 if (editButton) {
@@ -127,7 +124,7 @@ if (saveButton) {
   saveButton.style.display = 'inline-block';
 }
 
-// Hide the span elements and show the input fields
+
 const inputFields = row.querySelectorAll('input[type="text"]');
 const spanElements = row.querySelectorAll('span');
 
@@ -165,7 +162,6 @@ const address = addressInput.value;
 const bills = billsInput.value;
 
 
-// Check if there are any changes
 if (name !== nameSpan.textContent ||
   email !== emailSpan.textContent ||
   phone !== phoneSpan.textContent ||
@@ -173,7 +169,7 @@ if (name !== nameSpan.textContent ||
   || bills !== billsSpan.textContent) {
 
 
-// Send the updated customer information to the server
+
 const requestData = {
   _id: id,
   name:name,
@@ -183,7 +179,7 @@ const requestData = {
   bills:bills
 };
 
-// Send an AJAX request to update the customer
+
 fetch('/update-customer', {
 method: 'PUT',
 headers: {
@@ -193,9 +189,9 @@ body: JSON.stringify(requestData)
 })
 .then(response => response.json())
 .then(data => {
-// Check the response data for success or failure
+
 if (data.success) {
-  // Update the displayed customer information
+
   nameSpan.textContent = name;
   emailSpan.textContent = email;
   phoneSpan.textContent = phone;
@@ -203,7 +199,6 @@ if (data.success) {
   billsSpan.textContent = bills;
   location.reload();
 
-  // Switch back to view mode
   row.classList.remove('edit-mode');
   
   const editButton = row.querySelector('.edit-button');
@@ -217,7 +212,7 @@ if (data.success) {
     saveButton.style.display = 'none';
   }
 
-  // Hide the input fields and show the span elements
+
   const inputFields = row.querySelectorAll('input[type="text"]');
   const spanElements = row.querySelectorAll('span');
 
@@ -230,17 +225,17 @@ if (data.success) {
   });
 } else {
   console.error('Failed to update customer');
-  // Handle failure case
+
 }
 })
 .catch(error => {
 console.error('Error updating customer:', error);
-// Handle error case
+
 });
 
 
 } else {
-// No changes, switch back to view mode without sending a request
+
 row.classList.remove('edit-mode');
 
 const editButton = row.querySelector('.edit-button');
@@ -254,7 +249,6 @@ if (saveButton) {
   saveButton.style.display = 'none';
 }
 
-// Hide the input fields and show the span elements
 const inputFields = row.querySelectorAll('input[type="text"]');
 const spanElements = row.querySelectorAll('span');
 

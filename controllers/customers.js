@@ -20,7 +20,7 @@ const { findCustomers } = require('./users');
    */
   const createCustomer=async (req, res)=>{
   const { name, email, phone, address,bills } = req.body;
-  const {validEmail,validName,validPhone,validAddress, validBills}=validateInputs(email, name, false ,false, phone, address, bills);
+  const {validEmail,validName,validPhone,validAddress, validBills}=validateInputs(email, name, false , phone, address, bills);
   const find =(await findCustomers( {email:email} ));
   if(validEmail && validName && validPhone && validAddress && validBills && !(find.length) ){
   const user = req.session.user.name;
@@ -68,7 +68,7 @@ else res.status(500).send('Error adding customer');
    */
   const updateCustomer = async (req,res) =>{
     const { _id ,name, email, phone, address,bills } = req.body;
-  const {validEmail,validName,validPhone,validAddress,validBills}=validateInputs(email, name, false ,false, phone, address,bills);
+  const {validEmail,validName,validPhone,validAddress,validBills}=validateInputs(email, name, false , phone, address,bills);
   if(validEmail && validName && validPhone && validAddress && validBills ){
   const user = req.session.user.name;
 

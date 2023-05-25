@@ -10,8 +10,6 @@ const validateInputs = require('./validateInputs');
 const accessControl = async (req, res, next) => {
 const user = req.session.user;
 if (user){
-const {validEmail,validName,validPass,validCompany}=validateInputs(user.email, user.name, user.password, user.company);
-if(validEmail && validName && validPass && validCompany){
   try {
     if (user) {
       const customers = await findCustomers( user );
@@ -23,10 +21,7 @@ if(validEmail && validName && validPass && validCompany){
     res.status(500).json({ error: 'Internal server error' });
   }
     next();
-  }
-   else {
-    res.redirect('/');
-  }}
+}
   else{
     res.redirect('/');
   }
