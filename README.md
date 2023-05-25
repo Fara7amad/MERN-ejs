@@ -33,11 +33,17 @@ It consists of 3 views:
     - Self-register (fields: name, email, password, company)
     - Login (fields: email, password)
 4. All routes are protected except the login and registration, but if the user is logged in already he must logout to return to the login page.
-5. Users cannot modify other user's customers
+5. Users cannot modify other user's customers.
+6. Regex Explanation:
+   ```js
+      const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z]+\.[a-zA-Z]+$/; //basic email pattern
+      const nameRegex = /^([a-zA-Z]+\s)*[a-zA-Z]/; // contains only alphabetical characters, allowing multiple words separated by spaces
+      const passRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/; // at least 1 (digit, lowercase, uppercase), minimum length of 8 characters 
+      const companyRegex=/^[a-zA-Z0-9\s]+$/i //allows alphanumeric characters and spaces.
+      const phoneRegex=/^\+?[1-9]\d{1,14}$/  //phone numbers in international format, with an optional "+" sign followed by 1 to 14 digits (NO SPACES)
+      const addressRegex=/^[a-zA-Z0-9\s,.'-]+$/i // alphanumeric characters, spaces, commas, periods, apostrophes, and hyphens.
+      const billsRegex=/^[0-9]+$/ //Only Numbers
+   ```
 ---
-<h2> Improvements needed: <h2>
-  
-1. Styling the "Add customer" functionality.  
-2. Styling fonts, buttons.
-3. Changing customers' schema to handle the fact that each customer may have more than 1 bill.
+<h4>Improvements needed: Changing customers' schema to handle the fact that each customer may have more than 1 bill.<h4> 
  
