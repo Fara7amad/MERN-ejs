@@ -46,6 +46,8 @@ It consists of 3 views:
    ```
 ---
 <h4>Improvements needed: </h4>
+
 1. Changing customers' schema to handle the fact that each customer may have more than 1 bill.
-2. Server-Side pagination needed  
+2. Server-Side pagination needed 
+3. Adding customer moadl needs improvements in displaying the error source and keeping the user's input values displayed. 
  
