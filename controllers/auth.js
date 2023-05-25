@@ -38,6 +38,10 @@ const postSignup=async(req,res)=>{
  * @param {Object} res Renders login if not logged in already, if logged it redirects the user to customers page
  */
 const getLogggin = async (req, res) => {
+  if(req.session.user){
+    res.redirect('/customers');
+  }
+  else
   res.render('login',{error:false});
 }
 
