@@ -24,7 +24,7 @@ const customerSchema = new mongoose.Schema({
   bills: [
     {
       amount: {
-        type: Number,
+        type: String,
         required: true,
         default: 0,
       },

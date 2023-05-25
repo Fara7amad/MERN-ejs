@@ -20,25 +20,24 @@ const newName = document.getElementById('newName').value;
 const newEmail = document.getElementById('newEmail').value;
 const newPhone = document.getElementById('newPhone').value;
 const newAddress = document.getElementById('newAddress').value;
+const newBills = document.getElementById('newBills').value;
 
 const newCustomer = {
 name: newName,
 email: newEmail,
 phone: newPhone,
 address: newAddress,
+bills: newBills
 };
 
 $.ajax({
 url: '/customers',
 type: 'POST',
 data: newCustomer,
-success: function(response) {
-  console.log(response);
+success: function() {
   location.reload();
-  // Update the table as desired
 },
-error: function(error) {
-  console.error(error);
+error: function() {
   alert('Error adding customer');
 }
 });
@@ -48,6 +47,8 @@ document.getElementById('newName').value = '';
 document.getElementById('newEmail').value = '';
 document.getElementById('newPhone').value = '';
 document.getElementById('newAddress').value = '';
+document.getElementById('newBills').value = '';
+
 
 const addCustomerForm = document.getElementById('addCustomerForm');
 addCustomerForm.style.display = 'none';
@@ -151,22 +152,29 @@ const nameInput = row.querySelector('#editName' + rowId);
 const emailInput = row.querySelector('#editEmail' + rowId);
 const phoneInput = row.querySelector('#editPhone' + rowId);
 const addressInput = row.querySelector('#editAddress' + rowId);
+const billsInput = row.querySelector('#editBills' + rowId);
+
 
 const nameSpan = row.querySelector('#name' + rowId);
 const emailSpan = row.querySelector('#email' + rowId);
 const phoneSpan = row.querySelector('#phone' + rowId);
 const addressSpan = row.querySelector('#address' + rowId);
+const billsSpan = row.querySelector('#bills' + rowId);
+
 
 const name = nameInput.value;
 const email = emailInput.value;
 const phone = phoneInput.value;
 const address = addressInput.value;
+const bills = billsInput.value;
+
 
 // Check if there are any changes
 if (name !== nameSpan.textContent ||
   email !== emailSpan.textContent ||
   phone !== phoneSpan.textContent ||
-  address !== addressSpan.textContent) {
+  address !== addressSpan.textContent
+  || bills !== billsSpan.textContent) {
 
 
 // Send the updated customer information to the server
@@ -175,7 +183,8 @@ const requestData = {
   name:name,
   email:email,
   phone:phone,
-  address:address
+  address:address,
+  bills:bills
 };
 
 // Send an AJAX request to update the customer
@@ -195,6 +204,7 @@ if (data.success) {
   emailSpan.textContent = email;
   phoneSpan.textContent = phone;
   addressSpan.textContent = address;
+  billsSpan.textContent = bills;
   location.reload();
 
   // Switch back to view mode

@@ -6,7 +6,7 @@ const app = express()
 
 const auth=require('./routes/auth');
 
-const dashboard = require('./routes/dashboard');
+const dashboard = require('./routes/customers');
 
 
 require('dotenv').config()

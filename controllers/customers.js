@@ -1,21 +1,29 @@
 const customer = require('../models/customer');
 const validateInputs=require('../middleware/validateInputs');
-const { findCustomers } = require('./operations');
+const { findCustomers } = require('./users');
 
+/**
+ * Getting customers page 
+ * @param {Object} req Holds the session 
+ * @param {Object} res Rendering cutomers page and passing filtered customers 
+ */
   const getCustomers = async (req, res) => {
     const user = req.session.user; 
     const customers = req.customers; 
     res.render('customers', { customers:customers,user });
   }
   
+  /**
+   * Create New Customer In Database
+   * @param {Object} req Holds the customer details to be created 
+   * @param {Object} res Send a message whether the process success or fail
+   */
   const createCustomer=async (req, res)=>{
-  const { name, email, phone, address } = req.body;
-  console.log(name,email,phone,address)
-  const {validEmail,validName,validPhone,validAddress}=validateInputs(email, name, false ,false, phone, address);
-  console.log(validEmail,validName,validPhone,validAddress)
+  const { name, email, phone, address,bills } = req.body;
+  const {validEmail,validName,validPhone,validAddress, validBills}=validateInputs(email, name, false ,false, phone, address, bills);
   const find =(await findCustomers( {email:email} ));
-  if(validEmail && validName && validPhone && validAddress && !(find.length) ){
-
+  if(validEmail && validName && validPhone && validAddress && validBills && !(find.length) ){
+    
   const user = req.session.user.name;
 
   const newCustomer = new customer({
@@ -23,7 +31,7 @@ const { findCustomers } = require('./operations');
     email,
     phone,
     address,
-    bills: [{ amount: 0, user }]
+    bills: [{ amount: bills.toString(), user }]
   });
   
   newCustomer.save()
@@ -37,7 +45,11 @@ const { findCustomers } = require('./operations');
 else res.status(500).send('Error adding customer');
   }
 
-
+/**
+ * Delete a customer from database
+ * @param {Object} req To get the cutomer id from URL
+ * @param {Object} res Send a message whether the process success or fail
+ */
   const deleteCustomer= async(req,res) =>{
     try {
       const customerId = req.params.id;
@@ -51,13 +63,20 @@ else res.status(500).send('Error adding customer');
   }
 
 
+  /**
+   * Update customer details in database
+   * @param {Object} req Holds the customer data to be updated
+   * @param {Object} res Send a message whether the process success or fail
+   */
   const updateCustomer = async (req,res) =>{
-    const { _id ,name, email, phone, address } = req.body;
-  const {validEmail,validName,validPhone,validAddress}=validateInputs(email, name, false ,false, phone, address);
-  if(validEmail && validName && validPhone && validAddress ){
+    const { _id ,name, email, phone, address,bills } = req.body;
+  const {validEmail,validName,validPhone,validAddress,validBills}=validateInputs(email, name, false ,false, phone, address,bills);
+  if(validEmail && validName && validPhone && validAddress && validBills ){
+  const user = req.session.user.name;
+
     customer.findOneAndUpdate(
       {_id: _id}, 
-      { name, email, phone, address },
+      { name, email, phone, address, bills: [{ amount: bills.toString(), user }] },
       { new: true }
     )
       .then(updatedCustomer => {

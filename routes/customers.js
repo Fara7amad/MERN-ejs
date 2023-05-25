@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const accessControl = require('../middleware/auth');
-const {getCustomers, createCustomer, deleteCustomer, updateCustomer}=require('../controllers/dashboard');
+const {getCustomers, createCustomer, deleteCustomer, updateCustomer}=require('../controllers/customers');
 
 
 router.get('/customers', accessControl, getCustomers);

@@ -74,8 +74,9 @@
         </td>
         <td class="text-center">
           <% for (let j = 0; j < customers[i].bills.length; j++) { %>
-          <%= customers[i].bills[j].amount %>
-          <% } %>
+            <span id="bills<%= i %>"><%= customers[i].bills[j].amount %></span>
+            <input type="text" id="editBills<%= i %>" value="<%= customers[i].bills[j].amount %>" style="display: none;">
+            <% } %>
         </td>
         <td class="text-center">
           <% for (let j = 0; j < customers[i].bills.length; j++) { %>
@@ -102,6 +103,8 @@
     <input type="email" id="newEmail" placeholder="Email" required>
     <input type="tel" id="newPhone" placeholder="Phone" required>
     <input type="text" id="newAddress" placeholder="Address" required>
+    <input type="text" id="newBills" placeholder="Bills" required>
+
     <button type="button" onclick="addCustomer()">Add</button>
   </form>
   

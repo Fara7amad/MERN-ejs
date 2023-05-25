@@ -1,4 +1,4 @@
-const { findCustomers } = require('../controllers/operations');
+const { findCustomers } = require('../controllers/users');
 const validateInputs = require('./validateInputs');
 
 const accessControl = async (req, res, next) => {
