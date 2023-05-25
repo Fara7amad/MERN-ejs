@@ -19,13 +19,16 @@ const getSignup=async(req,res)=>{
 const postSignup=async(req,res)=>{
   const {  name, email, password, company} = req.body;
   if(!req.body){res.render('signup',{error:false});}
-  const {validEmail,validName,validPass}=validateInputs(email,name,password);
-  if(validEmail && validName && validPass){
+  const user = await findUser(email);
+  if (user) {return res.render('login',{error:'User exists! '});}
+  const {validEmail,validName,validPass, validCompany}=validateInputs(email,name,password,company);
+  if(validEmail && validName && validPass && validCompany){
+
     createUser(name,email,password,company,res);
     res.redirect("/");
   }
   else{
-    if (!validName) { res.render('signup', { error: { name: !validName, email: !validEmail, password: !validPass } });}
+     res.render('signup', { error: { name: !validName, email: !validEmail, password: !validPass, company:!validCompany } });
   }
   
 }

@@ -1,6 +1,12 @@
 const { findCustomers } = require('../controllers/users');
 const validateInputs = require('./validateInputs');
 
+/**
+ * Filters the customers according to the logged user's company
+ * @param {Object} req Holds the session and used to save filtered customers
+ * @param {Object} res 
+ * @param {*} next  
+ */
 const accessControl = async (req, res, next) => {
 const user = req.session.user;
 if (user){
@@ -8,7 +14,6 @@ const {validEmail,validName,validPass,validCompany}=validateInputs(user.email, u
 if(validEmail && validName && validPass && validCompany){
   try {
     if (user) {
-      // console.log('user:',user.name);
       const customers = await findCustomers( user );
       req.customers = customers;
     }
@@ -20,7 +25,6 @@ if(validEmail && validName && validPass && validCompany){
     next();
   }
    else {
-    // res.status(403).json({ error: 'Access denied' });
     res.redirect('/');
   }}
   else{

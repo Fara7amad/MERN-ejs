@@ -1,3 +1,16 @@
+
+/**
+ * Function to validate all system inputs
+ * @param {String} email 
+ * @param {String} name 
+ * @param {String} password 
+ * @param {String} company 
+ * @param {String} phone 
+ * @param {String} address 
+ * @param {Number} bills 
+ * @returns boolean results
+ */
+
 const validateInputs= (email, name , password, company,phone, address, bills)=>{
       const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z]+\.[a-zA-Z]+$/;
       const nameRegex = /^([a-zA-Z]+\s)*[a-zA-Z]/;
