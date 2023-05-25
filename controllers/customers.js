@@ -23,7 +23,6 @@ const { findCustomers } = require('./users');
   const {validEmail,validName,validPhone,validAddress, validBills}=validateInputs(email, name, false ,false, phone, address, bills);
   const find =(await findCustomers( {email:email} ));
   if(validEmail && validName && validPhone && validAddress && validBills && !(find.length) ){
-    
   const user = req.session.user.name;
 
   const newCustomer = new customer({
@@ -53,7 +52,6 @@ else res.status(500).send('Error adding customer');
   const deleteCustomer= async(req,res) =>{
     try {
       const customerId = req.params.id;
-      console.log(customerId)
       await customer.findByIdAndRemove(customerId);
       return res.json({ success: true });
     } catch (error) {

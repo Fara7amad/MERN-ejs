@@ -7,12 +7,8 @@ $(document).ready(function() {
 });
 
 function toggleAddCustomerForm() {
-const addCustomerForm = document.getElementById('addCustomerForm');
-if (addCustomerForm.style.display === 'none') {
-addCustomerForm.style.display = 'block';
-} else {
-addCustomerForm.style.display = 'none';
-}
+  const modalInstance = new bootstrap.Modal(document.getElementById('addModal'));
+modalInstance.show();
 }
 
 function addCustomer() {
@@ -50,8 +46,8 @@ document.getElementById('newAddress').value = '';
 document.getElementById('newBills').value = '';
 
 
-const addCustomerForm = document.getElementById('addCustomerForm');
-addCustomerForm.style.display = 'none';
+const modalInstance = new bootstrap.Modal(document.getElementById('addModal'));
+modalInstance.hide();
 
 }
 
