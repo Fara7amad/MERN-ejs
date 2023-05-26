@@ -37,10 +37,10 @@ It consists of 3 views:
 6. Regex Explanation:
    ```js
       const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z]+\.[a-zA-Z]+$/; //basic email pattern
-      const nameRegex = /^([a-zA-Z]+\s)*[a-zA-Z]/; // contains only alphabetical characters, allowing multiple words separated by spaces
+      const nameRegex = /^[a-zA-Z ]*$/; // contains only alphabetical characters, allowing multiple words separated by spaces
       const passRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/; // at least 1 (digit, lowercase, uppercase), minimum length of 8 characters 
       const companyRegex=/^[a-zA-Z0-9\s]+$/i //allows alphanumeric characters and spaces.
-      const phoneRegex=/^\+?[1-9]\d{1,14}$/  //phone numbers in international format, with an optional "+" sign followed by 1 to 14 digits (NO SPACES)
+      const phoneRegex= /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/ //phone number with "-" and/or country code 
       const addressRegex=/^[a-zA-Z0-9\s,.'-]+$/i // alphanumeric characters, spaces, commas, periods, apostrophes, and hyphens.
       const billsRegex=/^[0-9]+$/ //Only Numbers
    ```
