@@ -22,7 +22,7 @@ const { findCustomers } = require('./users');
   const { name, email, phone, address,bills } = req.body;
   const {validEmail,validName,validPhone,validAddress, validBills}=validateInputs(email, name, false , phone, address, bills);
   const find =(await findCustomers( {email:email} ));
-  if(validEmail && validName && validPhone && validAddress && validBills && !(find.length) ){
+  if(validEmail && validName && validPhone && validAddress && validBills && !(Object.keys(find).length) ){
   const user = req.session.user.name;
 
   const newCustomer = new customer({

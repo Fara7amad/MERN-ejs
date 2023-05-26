@@ -13,10 +13,10 @@
 
 const validateInputs= (email, name , password,phone, address, bills)=>{
       const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z]+\.[a-zA-Z]+$/;
-      const nameRegex = /^([a-zA-Z]+\s)*[a-zA-Z]$/;
+      const nameRegex = /^[a-zA-Z ]*$/;
       const passRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
-      const phoneRegex=/^\+?[1-9]\d{1,14}$/  //phone numbers in international format, with an optional "+" sign followed by 1 to 14 digits.
-      const addressRegex=/^[a-zA-Z0-9\s,.'-]+$/i // alphanumeric characters, spaces, commas, periods, apostrophes, and hyphens.
+      const phoneRegex= /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;   
+      const addressRegex=/^[a-zA-Z0-9\s,.'-]+$/;
       const billsRegex=/^[0-9]+$/
       //signup validation
       if(email&&name&&password){
